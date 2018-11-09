@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   grocery_item.associate = function(models) {
     // associations can be defined here
-    grocery_item.belongsTo(models.grocery_store, { foreignKey: 'store', as: 'theStore'})
+    grocery_item.belongsTo(models.grocery_store, { foreignKey: 'id', as: 'theStore'})
   };
   return grocery_item;
 };
