@@ -1,0 +1,22 @@
+{
+  "name": "grocery_list",
+  "version": "1.0.0",
+  "main": "bapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "install": "^0.12.2",
+    "mustache-express": "^1.2.8",
+    "pg": "^7.6.1",
+    "pg-promise": "^8.5.1",
+    "sequelize": "^4.41.1"
+  },
+  "devDependencies": {},
+  "description": ""
+}

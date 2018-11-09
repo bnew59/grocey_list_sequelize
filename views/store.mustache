@@ -1,0 +1,33 @@
+<html>
+<head>
+</head>
+
+<body>
+<div>
+    <a href="/">home</a>
+ {{#theStore}}
+    <h3>{{store}}</h3>
+    <h4>{{city}}</h4>
+
+     <form action="/add-item/{{id}}" method="POST">
+
+        <input type="hidden" value={{id}}/>
+        <input type="text" name="item" placeholder="Item"/>
+        <input type="text" name="qty" placeholder="Quantity"/>
+        <input type="submit" value="Submit"/>
+    
+    </form>
+
+    {{#parsedItems}}
+    <ul>
+        <li>
+            <strong>{{item}}</strong> <p>quantity: {{qty}}</p>
+        </li>
+        <br/>
+    </ul>
+    {{/parsedItems}}
+
+ {{/theStore}}
+
+</div>
+</body>
