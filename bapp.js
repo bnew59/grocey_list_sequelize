@@ -59,12 +59,83 @@ app.get('/store/:id',function(req, res){
 
   var storeId = req.params.id
 
-  models.grocery_store.findAll({ where: {id: storeId}, include: [{model: models.grocery_item, as: 'items'}]}).then(function(results){
+  models.grocery_store.findAll({ where: {id: storeId}, include: [
+    {model: models.grocery_item, as: 'items'},
+    {model: models.aisle, as: 'aisles'}
+  ]}).then(function(results){
     
 
     var theStore = results[0]
-    var storeItems = theStore.dataValues.items
-    theStore.parsedItems = storeItems
+
+    // first, populate parsedAisles var with an object that looks like 
+    //  {
+    //      id: * the aisle id *
+    //      aisle_number: * the aisle number *
+    //      items: [] * the array that you will push items of this aisle to *
+    //  }
+
+
+
+  
+    var parsedItems = theStore.dataValues.items
+    var storeAisles = theStore.dataValues.aisles
+    var parsedAisles = []
+    theStore.parsedItems = parsedItems
+    theStore.parsedAisles = parsedAisles
+
+    
+
+    // loop over items, check the aisle_id of the item, look in the array of aisles for the aisle that has an id equal
+    // to the aisle_id of the item, if it does, push the item into that aisle object, in the array under the items key
+
+    for(var i in storeAisles){
+   
+      var parsedAisle = storeAisles[i].dataValues
+
+      var itemsOfAisle = []
+
+
+      for (var j = 0; j < parsedItems.length; j++) {
+        let theItem = parsedItems[j].dataValues
+
+        console.log(parsedAisle.id, theItem)
+
+        if(parsedAisle.id === theItem.aisle_id){
+          itemsOfAisle.push(theItem)
+        }
+      
+      }
+
+
+
+
+      parsedAisles.push({
+        id: parsedAisle.id,
+        aisle_number: parsedAisle.number,
+        items: itemsOfAisle
+      })
+
+
+
+    }
+
+    console.log(parsedAisles)
+    
+
+
+
+
+
+    // for (i = 0; i < theStore.length; i++) {
+    //   if (parsedAisles.includes(theStore[i])) {
+    //       continue
+    //   } else {
+    //       parsedAisles.push(theStore[i])
+    //   }
+    // }
+
+    theStore.aislesArray = parsedAisles
+  
     res.render('store',{theStore: theStore})
 
   })

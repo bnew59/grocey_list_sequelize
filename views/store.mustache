@@ -18,14 +18,27 @@
     
     </form>
 
-    {{#parsedItems}}
     <ul>
-        <li>
-            <strong>{{item}}</strong> <p>quantity: {{qty}}</p>
-        </li>
-        <br/>
+        {{#aislesArray}}
+            <li>
+
+                <strong>Aisle: {{aisle_number}}</strong>
+                <ul>
+                    {{#items}}
+                        
+                        <li>
+                            <p>{{item}}</p>
+                            <p>{{qty}}</p>
+                            
+                        </li>
+                        <br/>
+                
+                    {{/items}}
+                 </ul>
+            </li>
+            <br/>
+        {{/aislesArray}}
     </ul>
-    {{/parsedItems}}
 
  {{/theStore}}
 
