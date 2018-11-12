@@ -111,6 +111,7 @@ app.get('/store/:id',function(req, res){
 
       parsedAisles.push({
         id: parsedAisle.id,
+        store_id: parsedAisle.store_id,
         aisle_number: parsedAisle.number,
         items: itemsOfAisle
       })
@@ -142,11 +143,13 @@ app.get('/store/:id',function(req, res){
 })
 
 app.post('/add-item/:storeid', function(req,res){
-  let storeID = req.params.storeid
+  let storeID = parseInt(req.params.storeid)
+  var aisleId = parseInt(req.body.aisle)
   let item = req.body.item
   let qty = req.body.qty
   const grocery_item =  models.grocery_item.build({
     store:storeID,
+    aisle_id: aisleId,
     item:item,
     qty:qty
         })
