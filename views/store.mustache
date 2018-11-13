@@ -12,9 +12,23 @@
      <form action="/add-item/{{id}}" method="POST">
 
         <input type="hidden" value={{id}}/>
-        <input type="text" name="item" placeholder="Item"/>
+        <select name="item">
+            <option value="english_muffins">English Muffins</option>
+            <option value="wheat_bread">Wheat Bread</option>
+            <option value="white_bread">White Bread</option>
+            <option value="biscuits">Biscuits</option>
+            <option value="buns">Buns</option>
+            <option value="jam">Jam</option>
+            <option value="chips">Chips</option>
+            <option value="dips">Dips</option>
+            <option value="trail_mix">Trail Mix</option>
+            <option value="rice_cakes">Rice Cakes</option>
+            <option value="nuts">Nuts</option>
+            <option value="sugar">Sugar</option>
+            <option value="spices">Spices</option>
+        </select>
         <input type="text" name="qty" placeholder="Quantity"/>
-        <input type="text" name="aisle" placeholder="Aisle Number"/>
+        {{! <input type="text" name="aisle" placeholder="Aisle Number"/> }}
         <input type="submit" value="Submit"/>
     
     </form>
@@ -27,10 +41,11 @@
 
                 <form action="/add-item/{{store_id}}" method="POST">
 
-                    <input type="hidden" name="aisle" value={{id}}/>
-                    <input type="text" name="item" placeholder="Item"/>
+                    <input type="hidden" name="aisle" value={{id/> }}
+
+                    {{! <input type="text" name="item" placeholder="Item"/>
                     <input type="text" name="qty" placeholder="Quantity"/>
-                    <input type="submit" value="Submit"/>
+                    <input type="submit" value="Submit"/> }}
 
                 </form>
 

@@ -4,11 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     store: DataTypes.INTEGER,
     item: DataTypes.STRING,
     qty: DataTypes.INTEGER,
-    aisle_id: DataTypes.INTEGER
+    aisle_number: DataTypes.INTEGER
   }, {});
   grocery_item.associate = function(models) {
     // associations can be defined here
-    grocery_item.belongsTo(models.grocery_store, { foreignKey: 'id', as: 'theStore'})
+    grocery_item.belongsTo(models.aisle, { foreignKey: 'id' })
+    
   };
   return grocery_item;
 };

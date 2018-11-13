@@ -142,11 +142,42 @@ app.get('/store/:id',function(req, res){
   })
 })
 
+app.get('/aisle/:id',function(req, res){
+
+  var aisleId = req.params.id
+
+  models.aisle.findOne({ include: [{model: models.aisle, as: 'items'}]}).then(function(stores){
+    
+
+
+
+  })
+})
+
+app.get('/aisles',function(req, res){
+  var storeId = 1
+
+  models.aisle.findAll({ where: { store_id: storeId }, include: [{model: models.grocery_item}]} ).then(function(results){
+
+    console.log(results[0].dataValues)
+
+  })
+})
+
 app.post('/add-item/:storeid', function(req,res){
   let storeID = parseInt(req.params.storeid)
   var aisleId = parseInt(req.body.aisle)
   let item = req.body.item
   let qty = req.body.qty
+
+  if( item == "white_bread" || item =="wheat_bread" ){
+    aisleId = 1
+  }
+
+  if( item == "chips" || item =="dips" ){
+    aisleId = 2
+  }
+
   const grocery_item =  models.grocery_item.build({
     store:storeID,
     aisle_id: aisleId,

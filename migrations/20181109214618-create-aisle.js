@@ -4,12 +4,10 @@ module.exports = {
     return queryInterface.createTable('aisles', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      number: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique: true
       },
       store_id: {
         type: Sequelize.INTEGER,
@@ -17,6 +15,9 @@ module.exports = {
           model: 'grocery_stores',
           key: 'id'
         }
+      },
+      aisle_category: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

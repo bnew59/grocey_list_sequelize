@@ -21,6 +21,15 @@ module.exports = {
       qty: {
         type: Sequelize.INTEGER
       },
+      aisle_number: {
+
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'aisles',
+          key: 'id'
+        }
+
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

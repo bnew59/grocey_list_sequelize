@@ -1,12 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const aisle = sequelize.define('aisle', {
-    number: DataTypes.INTEGER,
-    store_id: DataTypes.INTEGER
+    store_id: DataTypes.INTEGER,
+    aisle_category: DataTypes.STRING,
   }, {});
   aisle.associate = function(models) {
     // associations can be defined here
     aisle.belongsTo(models.grocery_store, {'foreignKey': 'id', as: 'theAisle' })
+    aisle.hasMany(models.grocery_item, { foreignKey: 'aisle_number' })
   };
   return aisle;
 };
