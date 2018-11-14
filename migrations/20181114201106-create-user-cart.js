@@ -1,22 +1,37 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('aisles', {
+    return queryInterface.createTable('user_carts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      store_id: {
+      user: {
+        type: Sequelize.INTEGER,
+        
+      },
+      item: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'grocery_items',
+          key: 'id'
+        },
+      },
+      aisle: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'aisles',
+          key: 'id'
+        },
+      },
+      store: {
         type: Sequelize.INTEGER,
         references: {
           model: 'grocery_stores',
           key: 'id'
-        }
-      },
-      aisle_category: {
-        type: Sequelize.STRING
+        },
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +44,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('aisles');
+    return queryInterface.dropTable('user_carts');
   }
 };

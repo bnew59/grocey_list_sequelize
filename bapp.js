@@ -17,7 +17,49 @@ app.set('views','./views')
 app.set('view engine','mustache')
 
 
+app.get('/cart/:uid/:storeid',function(req, res){
+  
+  var uid = req.params.uid
+  var storeId = req.params.storeid
+  models.user_cart.findAll({ where: { user: uid, store: storeId },
+  include: [  { model: models.aisle, as: 'theAisle' }, { model: models.grocery_item, as: 'theItem' }]  }).then(
+    function(result){
+      
+      var itemsArray = []
+      
+      result.forEach(function(cartEntry, index){
 
+        var entry = cartEntry.dataValues
+
+        console.log(entry)
+      
+        var aisle = null
+        var item = null
+        
+        if(entry && entry.theAisle){
+          aisle = entry.theAisle.dataValues
+        
+        }
+
+        if(entry && entry.theItem){
+          item = entry.theItem.dataValues
+        
+        }
+
+        if(item && aisle){
+          itemsArray.push({aisle: aisle, item: item })
+        }
+
+        
+      })
+
+      // console.log(itemsArray)
+    
+    }
+  )
+  
+
+})
 
 
 app.get('/',function(req, res){
@@ -85,7 +127,7 @@ app.get('/aisles/:id',function(req, res){
 
   models.aisle.findAll({ where: { store_id: storeId }, include: [{model: models.grocery_item, as: 'items'}]} ).then(function(results){
 
-    console.log(results[1].dataValues.items)
+    console.log(results[0].dataValues.items)
 
   })
 })

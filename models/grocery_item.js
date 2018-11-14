@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   grocery_item.associate = function(models) {
     // associations can be defined here
-    grocery_item.belongsTo(models.aisle, { foreignKey: 'id' })
+                                  
+    //grocery_item.hasMany(models.user_cart, { foriegnKey: { name: 'item'} })
+    
+
     
   };
   return grocery_item;

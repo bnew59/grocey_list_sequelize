@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   aisle.associate = function(models) {
     // associations can be defined here
-    aisle.belongsTo(models.grocery_store, { foreignKey: 'id', as: 'theStore' })
-    aisle.hasMany(models.grocery_item, { foreignKey: 'aisle_number', as: 'items'})
+    // aisle.belongsTo(models.grocery_store, { foreignKey: 'id', as: 'theStore' })
+    // aisle.hasMany(models.grocery_item, { foreignKey: 'aisle_number', as: 'items'})
   };
   return aisle;
 };
